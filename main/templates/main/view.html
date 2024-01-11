@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+View
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% for td in user.todolist.all %}
+            {% csrf_token %}
+            <div class="list-group">
+                <a href="/{{td.id}}" class="list-group-item list-group-item-action">{{td.name}}</a>
+            </div>
+            <a href="delete/{{td.id}}" class="btn btn-outline-danger btn-sm">Delete</a>
+        {% endfor %}
+
+    {% else %}
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">You are not logged in!</li>
+        </ul>
+    {% endif %}
+
+{% endblock %}

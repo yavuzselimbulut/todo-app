@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Login Here
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">You are already logged in</li>
+        </ul>
+        <br>
+        <button onclick="location.href='/logout'" type="button" class="btn btn-danger">Logout</button>
+    {% else %}
+        <form method="post" class="from-group">
+            {% csrf_token %}
+            {{form|crispy}}
+            <p>Don't have an account? Create one <a href="/register">here</a></p>
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+    {% endif %}
+{% endblock %}

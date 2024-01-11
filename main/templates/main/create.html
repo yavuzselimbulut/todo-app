@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Create New List {% endblock %}
+
+{% block content %} 
+Create New List 
+
+    {% if request.user.is_authenticated %}
+        <form method="post" action="/create/">
+            {% csrf_token %}
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="submit", name="save" class="btn btn-success">Create New</button>
+                </div>
+                {{form.as_p}}
+            </div>
+        </form>
+    {% else %}
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">You are not logged in!</li>
+        </ul>
+    {% endif %}
+
+
+{% endblock %}
